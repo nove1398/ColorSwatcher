@@ -1,25 +1,55 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">SwatchUI</a>
+﻿<div class="pl-4 navbar text-white" style="background-color: #363c3c !important;padding-bottom: 0.1rem">
+    <a class="navbar-brand" href="" style="filter: invert(1)">
+        <img src="/images/logo.png" />
+    </a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
     </button>
 </div>
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
+<div class="@NavMenuCssClass " @onclick="ToggleNavMenu">
+    <ul class="nav flex-column text-dark">
+        <li class="nav-item col-12">
+            <button class="human-btn col font-weight-bold">Random Color</button>
+        </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
+            <NavLink class="nav-link" href="/swatch-details/name/red" Match="NavLinkMatch.All">
+                Red
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+            <NavLink class="nav-link" href="/swatch-details/name/orange" Match="NavLinkMatch.Prefix">
+                Orange
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            <NavLink class="nav-link" href="/swatch-details/name/yellow" Match="NavLinkMatch.All">
+                Yellow
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/swatch-details/name/green" Match="NavLinkMatch.All">
+                Green
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/swatch-details/name/blue" Match="NavLinkMatch.All">
+                Blue
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/swatch-details/name/purple" Match="NavLinkMatch.All">
+                Purple
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/swatch-details/name/brown" Match="NavLinkMatch.All">
+                Brown
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/swatch-details/name/gray" Match="NavLinkMatch.All">
+                Gray
             </NavLink>
         </li>
     </ul>

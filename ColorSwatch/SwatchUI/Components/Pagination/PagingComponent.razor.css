@@ -1,0 +1,9 @@
+﻿ul li {
+    list-style: none;
+    cursor: pointer;
+}
+
+ul > li.active {
+    text-decoration: underline;
+    font-weight: bold;
+}

@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwtchApi", "SwtchApi\SwtchApi.csproj", "{CF776141-4238-4866-95BF-F11142A8DD0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwtchApi", "SwtchApi\SwtchApi.csproj", "{CF776141-4238-4866-95BF-F11142A8DD0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwatchUI", "SwatchUI\SwatchUI.csproj", "{06453305-5532-4F99-AE16-57C9C307AC60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwatchUI", "SwatchUI\SwatchUI.csproj", "{06453305-5532-4F99-AE16-57C9C307AC60}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorSwatch.Domain", "ColorSwatch.Domain\ColorSwatch.Domain.csproj", "{171983F2-E75B-458A-8187-4FA9DDCC7D16}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorSwatch.Shared", "ColorSwatch.Shared\ColorSwatch.Shared.csproj", "{D6ACA943-F24B-4C95-B3F8-62199B8D83BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{06453305-5532-4F99-AE16-57C9C307AC60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06453305-5532-4F99-AE16-57C9C307AC60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06453305-5532-4F99-AE16-57C9C307AC60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{171983F2-E75B-458A-8187-4FA9DDCC7D16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{171983F2-E75B-458A-8187-4FA9DDCC7D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{171983F2-E75B-458A-8187-4FA9DDCC7D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{171983F2-E75B-458A-8187-4FA9DDCC7D16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6ACA943-F24B-4C95-B3F8-62199B8D83BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6ACA943-F24B-4C95-B3F8-62199B8D83BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6ACA943-F24B-4C95-B3F8-62199B8D83BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6ACA943-F24B-4C95-B3F8-62199B8D83BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

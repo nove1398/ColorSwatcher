@@ -1,7 +1,77 @@
 ﻿@page "/"
+@page "/{SearchTerm}"
+@inject HttpClient Http
 
-<h1>Hello, world!</h1>
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div>@errorMessage</div>
+    return;
+}
+@if (colorList == null)
+{
 
-Welcome to your new app.
+    <div>Loading... just a sec</div>
+    return;
+}
+<div class="container">
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    <div class="row flex-wrap">
+        @if (colorList.Count < 1)
+        {
+            <div class="text-center col-12">Oh no, seems we have no results for you this time</div>
+        }
+        @foreach (var color in colorList)
+        {
+            <ColorSwatchComponent ColorHex="@color.ColorValue" />
+
+        }
+    </div>
+    <div class="row">
+
+        <PagingComponent ClickCallback="FetchColors" Pages="pages" />
+    </div>
+</div>
+@code{
+    [Parameter] public string SearchTerm { get; set; }
+    private List<ColorResponse> colorList;
+    private string errorMessage;
+    private int pages;
+    private int perPage = 20;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        await FetchColors(1);
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await FetchColors(1);
+
+    }
+
+    private async Task FetchColors(int page)
+    {
+        try
+        {
+
+            var uri = $"?perPage={perPage}&pageNumber={page}";
+
+            if (!string.IsNullOrEmpty(SearchTerm))
+            {
+                uri += $"&searchTerm={SearchTerm}";
+
+            }
+
+            var result = await Http.GetFromJsonAsync<ApiResponse<List<ColorResponse>>>(uri);
+
+            pages = result.TotalPages;
+            if (result.Success)
+                colorList = result.Data;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Oops, seems like the server is offline. Try again later";
+        }
+    }
+}

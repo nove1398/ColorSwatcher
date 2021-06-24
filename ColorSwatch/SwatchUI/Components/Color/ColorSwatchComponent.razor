@@ -1,0 +1,19 @@
+﻿@inject NavigationManager _navMan
+
+<div class="card mr-2 mb-2 h-75"
+     @onclick="OpenSwatch">
+    <div class="card-body" style="background-color:@($"#{ColorHex}")">
+    </div>
+    <div class="card-footer">
+        @ColorHex
+    </div>
+</div>
+
+@code {
+    [Parameter] public string ColorHex { get; set; }
+
+    private void OpenSwatch()
+    {
+        _navMan.NavigateTo($"/swatch-details/{ColorHex.Replace("#", "")}");
+    }
+}

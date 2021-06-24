@@ -1,13 +1,23 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager _navMan
 
 <div class="page">
-    <div class="sidebar">
+    <div class="sidebar border-right border-dark">
         <NavMenu />
     </div>
 
     <div class="main">
-        <div class="top-row px-4">
-            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+        <div class="top-row px-4 py-3">
+            <!--Search-->
+            <div class="form-outline">
+                <input type="search" id="form1"
+                       @bind-value="hexSearch"
+                       @bind-value:event="oninput"
+                       @onkeydown="SearchColor"
+                       class="form-control"
+                       placeholder="Search"
+                       aria-label="Search" />
+            </div>
         </div>
 
         <div class="content px-4">
@@ -15,3 +25,16 @@
         </div>
     </div>
 </div>
+
+@code{
+
+    private string hexSearch { get; set; }
+
+    private void SearchColor(KeyboardEventArgs args)
+    {
+        if (args.Key == "Enter")
+        {
+            _navMan.NavigateTo($"/{hexSearch}");
+        }
+    }
+}

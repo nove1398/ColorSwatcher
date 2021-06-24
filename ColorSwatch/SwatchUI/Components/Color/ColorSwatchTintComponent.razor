@@ -1,0 +1,58 @@
+﻿<div class="row justify-content-center">
+
+    @foreach (var tint in tintList)
+    {
+        <ColorSwatchComponent ColorHex="@tint"></ColorSwatchComponent>
+
+    }
+</div>
+
+@code {
+    [Parameter] public string ColorHex { get; set; }
+
+    private List<string> tintList = new();
+
+    [Parameter] public bool IsHex { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+
+        return base.OnInitializedAsync();
+    }
+
+    protected override void OnParametersSet()
+    {
+        tintList.Clear();
+
+        var baseColor = new RGBColor();
+        if (IsHex)
+        {
+
+            var r = int.Parse(ColorHex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+            var g = int.Parse(ColorHex.Substring(1, 2), System.Globalization.NumberStyles.HexNumber);
+            var b = int.Parse(ColorHex.Substring(3, 2), System.Globalization.NumberStyles.HexNumber);
+            baseColor = new RGBColor { Red = r, Green = g, Blue = b };
+        }
+        else
+        {
+            var color = Color.FromName(ColorHex);
+            baseColor.Red = color.R;
+            baseColor.Green = color.G;
+            baseColor.Blue = color.B;
+        }
+
+        for (int i = 1; i <= 5; i++)
+        {
+            try
+            {
+                tintList.Add(baseColor.ToSeededTint(0.9 * (i * 0.2)).ToHex());
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
+
+    }
+}

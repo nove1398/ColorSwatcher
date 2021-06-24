@@ -1,7 +1,8 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Source Serif Pro', Helvetica, Arial, sans-serif;
 }
 
 a, .btn-link {
