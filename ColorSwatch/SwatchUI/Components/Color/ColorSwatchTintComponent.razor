@@ -1,36 +1,38 @@
 ﻿<div class="row justify-content-center">
 
-    @foreach (var tint in tintList)
+    @for (int i = 0; i < 5; i++)
     {
-        <ColorSwatchComponent ColorHex="@tint"></ColorSwatchComponent>
-
+        <ColorSwatchComponent ColorHex="@(ToSeededTint(baseColor, initialSeed - 0.1f).ToHex())"
+                              Height="100" />
+        initialSeed -= 0.1f;
     }
 </div>
 
 @code {
     [Parameter] public string ColorHex { get; set; }
 
-    private List<string> tintList = new();
-
     [Parameter] public bool IsHex { get; set; }
 
-    protected override Task OnInitializedAsync()
-    {
+    private List<string> tintList = new();
 
-        return base.OnInitializedAsync();
-    }
+    private float initialSeed = 0.9f;
+    private RGBColor baseColor = new();
 
-    protected override void OnParametersSet()
+    protected override void OnInitialized() => CalculateTint();
+
+    protected override void OnParametersSet() => CalculateTint();
+
+    private void CalculateTint()
     {
         tintList.Clear();
+        initialSeed = 0.9f;
 
-        var baseColor = new RGBColor();
         if (IsHex)
         {
 
             var r = int.Parse(ColorHex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
-            var g = int.Parse(ColorHex.Substring(1, 2), System.Globalization.NumberStyles.HexNumber);
-            var b = int.Parse(ColorHex.Substring(3, 2), System.Globalization.NumberStyles.HexNumber);
+            var g = int.Parse(ColorHex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+            var b = int.Parse(ColorHex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
             baseColor = new RGBColor { Red = r, Green = g, Blue = b };
         }
         else
@@ -41,18 +43,15 @@
             baseColor.Blue = color.B;
         }
 
-        for (int i = 1; i <= 5; i++)
+    }
+
+    public RGBColor ToSeededTint(RGBColor color, float seed)
+    {
+        return new RGBColor
         {
-            try
-            {
-                tintList.Add(baseColor.ToSeededTint(0.9 * (i * 0.2)).ToHex());
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-        }
-
+            Red = (int)(color.Red * seed),
+            Green = (int)(color.Green * seed),
+            Blue = (int)(color.Blue * seed)
+        };
     }
 }

@@ -3,9 +3,11 @@
         <ul class="d-flex ml-auto mr-auto justify-content-center">
             @for (int i = 1; i <= Pages; i++)
             {
-                <li class="mr-1" @onclick="@(async e => await FindPage(new Random().Next(1,Pages)))">@i</li>
+                var x = i;
+                <li class="mr-1 @(ActivePage==x?"active":"")"
+                    @onclick="@(e => FindPage(x))">@x</li>
 
-            }
+                }
         </ul>
     </div>
 </div>
@@ -13,6 +15,7 @@
 @code {
     [Parameter] public EventCallback<int> ClickCallback { get; set; }
     [Parameter] public int Pages { get; set; }
+    [Parameter] public int ActivePage { get; set; }
 
     private async Task FindPage(int page)
     {

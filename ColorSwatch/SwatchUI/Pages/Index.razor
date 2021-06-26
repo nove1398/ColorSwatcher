@@ -10,7 +10,7 @@
 @if (colorList == null)
 {
 
-    <div>Loading... just a sec</div>
+    <LoadingComponent />
     return;
 }
 <div class="container">
@@ -22,13 +22,13 @@
         }
         @foreach (var color in colorList)
         {
-            <ColorSwatchComponent ColorHex="@color.ColorValue" />
+            <ColorSwatchComponent ColorHex="@color.ColorValue" Height="150" />
 
         }
     </div>
     <div class="row">
 
-        <PagingComponent ClickCallback="FetchColors" Pages="pages" />
+        <PagingComponent ActivePage="activePage" ClickCallback="FetchColors" Pages="pages" />
     </div>
 </div>
 @code{
@@ -37,6 +37,7 @@
     private string errorMessage;
     private int pages;
     private int perPage = 20;
+    private int activePage;
 
     protected override async Task OnInitializedAsync()
     {
@@ -54,6 +55,7 @@
     {
         try
         {
+            activePage = page;
 
             var uri = $"?perPage={perPage}&pageNumber={page}";
 

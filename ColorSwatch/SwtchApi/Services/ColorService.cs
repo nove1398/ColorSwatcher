@@ -26,6 +26,8 @@ namespace SwtchApi.Services
         Task<ColorSwatcher> UpdateColor(string id, UpdateColorRequest request);
 
         Task<ColorSwatcher> SearchForHex(string request);
+
+        Task<ColorSwatcher> GrabRandomColor();
     }
 
     public class ColorService : IColorService
@@ -56,8 +58,22 @@ namespace SwtchApi.Services
             return results;
         }
 
-        public async Task<int> GetTotalColors()
-        => await _dbContext.Colors.AsNoTracking().CountAsync();
+        public async Task<int> GetTotalColors() => await _dbContext.Colors.AsNoTracking().CountAsync();
+
+        public async Task<ColorSwatcher> GrabRandomColor()
+        {
+            var total = await GetTotalColors();
+            var fullList = await _dbContext.Colors.AsNoTracking()
+                                .ToListAsync();
+            if (fullList == null || fullList.Count < 1)
+            {
+                return null;
+            }
+
+            var random = fullList[new Random().Next(1, total + 1)];
+
+            return random;
+        }
 
         public Task<ColorSwatcher> SearchForHex(string searchTerm)
         {

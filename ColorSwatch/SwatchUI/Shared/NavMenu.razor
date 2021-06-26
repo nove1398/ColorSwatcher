@@ -1,5 +1,7 @@
-﻿<div class="pl-4 navbar text-white" style="background-color: #363c3c !important;padding-bottom: 0.1rem">
-    <a class="navbar-brand" href="" style="filter: invert(1)">
+﻿@inject NavigationManager _navMan
+
+<div class="pl-4 navbar text-white" style="background-color: #363c3c !important;padding-bottom: 0.1rem">
+    <a class="navbar-brand" href="" style="filter: invert(1)" title="Home">
         <img src="/images/logo.png" />
     </a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -10,7 +12,10 @@
 <div class="@NavMenuCssClass " @onclick="ToggleNavMenu">
     <ul class="nav flex-column text-dark">
         <li class="nav-item col-12">
-            <button class="human-btn col font-weight-bold">Random Color</button>
+            <button @onclick="GetRandomColor"
+                    class="human-btn col font-weight-bold">
+                Random Color
+            </button>
         </li>
         <li class="nav-item px-3">
             <NavLink class="nav-link" href="/swatch-details/name/red" Match="NavLinkMatch.All">
@@ -63,5 +68,10 @@
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    private void GetRandomColor()
+    {
+        _navMan.NavigateTo($"/random-color/{Guid.NewGuid().ToString()}");
     }
 }

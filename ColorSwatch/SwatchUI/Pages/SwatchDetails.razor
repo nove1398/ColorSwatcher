@@ -3,12 +3,18 @@
 
 @if (color == null)
 {
-    <div class="text-danger">@errorMessage</div>
+    <LoadingComponent />
     return;
 }
-<ColorSwatchComponent ColorHex="@color.ColorValue"></ColorSwatchComponent>
 
-<ColorSwatchTintComponent ColorHex="@color.ColorValue" IsHex="true" />
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="text-danger">@errorMessage</div>
+}
+
+<ColorSwatchComponent ColorHex="@Id" Height="600"></ColorSwatchComponent>
+
+<ColorSwatchTintComponent ColorHex="@Id" IsHex="true" />
 
 @code {
     [Parameter] public string Id { get; set; }
@@ -18,43 +24,15 @@
 
     protected override async Task OnInitializedAsync()
     {
-        try
-        {
 
-            color = new ColorResponse { ColorValue = Id };
-            /*var result = await Http.GetFromJsonAsync<ApiResponse<ColorResponse>>($"{Id}");
-            if (result.Data == null)
-            {
-                errorMessage = "Color does not exist in database";
-                return;
-            }
-            color = result.Data;*/
-        }
-        catch (Exception ex)
-        {
-            errorMessage = $"An error occured while loading ";
-        }
+        color = new ColorResponse { ColorValue = Id };
 
     }
 
     protected override Task OnParametersSetAsync()
     {
-        try
-        {
 
-            color = new ColorResponse { ColorValue = Id };
-            /*var result = await Http.GetFromJsonAsync<ApiResponse<ColorResponse>>($"{Id}");
-            if (result.Data == null)
-            {
-                errorMessage = "Color does not exist in database";
-                return;
-            }
-            color = result.Data;*/
-        }
-        catch (Exception ex)
-        {
-            errorMessage = $"An error occured while loading ";
-        }
+        color = new ColorResponse { ColorValue = Id };
 
         return base.OnParametersSetAsync();
     }

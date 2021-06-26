@@ -1,0 +1,41 @@
+﻿@page "/random-color/{input}"
+@inject HttpClient Http
+
+@if (color == null)
+{
+    <LoadingComponent />
+    return;
+}
+<ColorSwatchComponent ColorHex="@color.ColorValue" Height="600"></ColorSwatchComponent>
+
+<ColorSwatchTintComponent ColorHex="@color.ColorValue" IsHex="true" />
+
+@code {
+    [Parameter] public string Input { get; set; }
+
+    private ColorResponse color;
+    private string errorMessage;
+
+    protected override async Task OnInitializedAsync() => await FetchColor();
+    protected override async Task OnParametersSetAsync() => await FetchColor();
+
+    private async Task FetchColor()
+    {
+        try
+        {
+
+            var result = await Http.GetFromJsonAsync<ApiResponse<ColorResponse>>($"random");
+            if (result.Data == null)
+            {
+                errorMessage = "No colors available";
+                return;
+            }
+            color = result.Data;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"An error occured while loading ";
+        }
+    }
+
+}

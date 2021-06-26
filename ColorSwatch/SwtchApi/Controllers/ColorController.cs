@@ -46,6 +46,17 @@ namespace SwtchApi.Controllers
             return Ok(response);
         }
 
+        [HttpGet("random")]
+        public async Task<IActionResult> GetRandomColor()
+        {
+            var color = await _colorService.GrabRandomColor();
+            if (color == null)
+                return NotFound("No colors found");
+
+            var response = new ApiResponse<ColorResponse>(color.ToDto());
+            return Ok(response);
+        }
+
         [HttpGet("name/{search}")]
         public async Task<IActionResult> SearchColorByHex(string search)
         {

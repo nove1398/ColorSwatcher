@@ -3,10 +3,16 @@
 
 @if (color == null)
 {
-    <div class="text-danger">@errorMessage</div>
+    <LoadingComponent />
     return;
 }
-<ColorSwatchComponent ColorHex="@color.ColorValue"></ColorSwatchComponent>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="text-danger">@errorMessage</div>
+}
+
+<ColorSwatchComponent ColorHex="@color.ColorValue" Height="600"></ColorSwatchComponent>
 
 <ColorSwatchTintComponent ColorHex="@color.ColorValue" IsHex="true" />
 
