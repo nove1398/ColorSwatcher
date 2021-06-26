@@ -61,7 +61,7 @@
 
             if (!string.IsNullOrEmpty(SearchTerm))
             {
-                uri += $"&searchTerm={SearchTerm}";
+                uri += $"&searchTerm={SearchTerm.Replace("#", "")}";
 
             }
 

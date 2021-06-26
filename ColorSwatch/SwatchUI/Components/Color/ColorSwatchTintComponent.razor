@@ -2,7 +2,7 @@
 
     @for (int i = 0; i < 5; i++)
     {
-        <ColorSwatchComponent ColorHex="@(ToSeededTint(baseColor, initialSeed - 0.1f).ToHex())"
+        <ColorSwatchComponent ColorHex="@(baseColor.ToSeededTint(initialSeed - 0.1f).ToHex())"
                               Height="100" />
         initialSeed -= 0.1f;
     }

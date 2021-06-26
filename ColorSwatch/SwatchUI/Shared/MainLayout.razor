@@ -10,12 +10,12 @@
         <div class="top-row px-4 py-3">
             <!--Search-->
             <div class="form-outline">
-                <input type="search" id="form1"
-                       @bind-value="hexSearch"
-                       @bind-value:event="oninput"
+                <input type="text" id="form1"
+                       @bind="hexSearch"
+                       @bind:event="oninput"
                        @onkeydown="SearchColor"
                        class="form-control"
-                       placeholder="Search"
+                       placeholder="Search (eg. EF2ABD)"
                        aria-label="Search" />
             </div>
         </div>
@@ -34,7 +34,7 @@
     {
         if (args.Key == "Enter")
         {
-            _navMan.NavigateTo($"/{hexSearch}");
+            _navMan.NavigateTo($"/{hexSearch.Replace("#", "")}");
         }
     }
 }
